@@ -1,8 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { HiMiniBars3CenterLeft } from 'react-icons/hi2';
-import { FaSearch, FaUser, FaCaretDown, FaShoppingCart, FaCaretUp } from 'react-icons/fa';
-import { RiBarChartHorizontalLine } from 'react-icons/ri';
-import Container from './Container';
+import React, { useState, useEffect, useRef } from "react";
+import { HiMiniBars3CenterLeft } from "react-icons/hi2";
+import {
+  FaSearch,
+  FaUser,
+  FaCaretDown,
+  FaShoppingCart,
+  FaCaretUp,
+} from "react-icons/fa";
+import { RiBarChartHorizontalLine } from "react-icons/ri";
+import Container from "./Container";
 
 const Navbar = () => {
   let [show, setShow] = useState(false);
@@ -13,23 +19,29 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (categoryDropdownRef.current && !categoryDropdownRef.current.contains(event.target)) {
+      if (
+        categoryDropdownRef.current &&
+        !categoryDropdownRef.current.contains(event.target)
+      ) {
         setShow(false);
       }
-      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
+      if (
+        userDropdownRef.current &&
+        !userDropdownRef.current.contains(event.target)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
   const handleCategoryClick = () => {
-    setShow((prevShow) => !prevShow); 
+    setShow((prevShow) => !prevShow);
   };
 
   return (
@@ -37,7 +49,11 @@ const Navbar = () => {
       <Container>
         <div className="flex items-center justify-between">
           <div className="lg:w-1/4 flex items-center relative">
-            <div onClick={handleCategoryClick} ref={categoryDropdownRef} className="flex items-center cursor-pointer">
+            <div
+              onClick={handleCategoryClick}
+              ref={categoryDropdownRef}
+              className="flex items-center cursor-pointer"
+            >
               {show ? <RiBarChartHorizontalLine /> : <HiMiniBars3CenterLeft />}
               <h3 className="px-3 hidden lg:block">Shop by Category</h3>
             </div>
@@ -55,7 +71,9 @@ const Navbar = () => {
                 <li className="px-4 py-2 text-[rgba(225,255,255,0.7)] cursor-pointer hover:text-white border-b-[1px] border-[#2D2D2D]">
                   Clothing
                 </li>
-                <li className="px-4 py-2 text-[rgba(225,255,255,0.7)] cursor-pointer hover:text-white">Bags</li>
+                <li className="px-4 py-2 text-[rgba(225,255,255,0.7)] cursor-pointer hover:text-white">
+                  Bags
+                </li>
               </ul>
             )}
           </div>

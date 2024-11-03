@@ -7,7 +7,6 @@ import {
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import Shop from "./pages/Shop";
-import Product_Inside from "./pages/Product_Inside";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
 import CheckOut from "./pages/CheckOut";
@@ -16,6 +15,7 @@ import Login from "./pages/Login";
 import MyAccount from "./pages/MyAccount";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   let router = createBrowserRouter(
@@ -23,7 +23,7 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
-        <Route path="/product" element={<Product_Inside />}></Route>
+        <Route path="/shop/:id" element={<ProductDetails />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/check" element={<CheckOut />}></Route>

@@ -5,7 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Container from "./Container";
 
-const ArrivalComponent = ({ item }) => {
+const BestsellersComponent = ({ item }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -44,6 +44,7 @@ const ArrivalComponent = ({ item }) => {
                 </li>
               </ul>
             </div>
+
             <div className="flex justify-between">
               <div className="">
                 <h3 className="text-[#262626] font-bold text-[16px] font-sans">
@@ -64,4 +65,4 @@ const ArrivalComponent = ({ item }) => {
   );
 };
 
-export default ArrivalComponent;
+export default BestsellersComponent;
