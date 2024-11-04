@@ -10,7 +10,6 @@ import Phone from "../components/Phone";
 const Home = () => {
   return (
     <div>
-      <Navbar />
       <Banner />
       <PromoBar />
       <ImageSec />

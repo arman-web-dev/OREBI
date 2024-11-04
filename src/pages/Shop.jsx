@@ -7,15 +7,18 @@ import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import Post from "../components/Post";
 import { ApiData } from "../components/ContextApi";
 import Pagination from "../components/Pagination";
+import { FaList } from "react-icons/fa";
+import { IoGrid } from "react-icons/io5";
 
 const Shop = () => {
   let info = useContext(ApiData);
   let [shop, setShop] = useState(true);
   let [color, setColor] = useState(true);
-  let [brand, setBrand] = useState(true);
-  let [price, setPrice] = useState(true);
+  let [brand, setBrand] = useState(false);
+  let [price, setPrice] = useState(false);
   let [currentPage, setCurrentPage] = useState(1);
   let [perPage, setPerPage] = useState(6);
+  let [activeGrid, setActiveGrid] = useState('');
 
   let lastPage = currentPage * perPage;
   let firstPage = lastPage - perPage;
@@ -40,6 +43,9 @@ const Shop = () => {
       setCurrentPage((state) => state - 1);
     }
   };
+  let handleMulti = () => {
+    setActiveGrid('active');
+  };
   return (
     <section>
       <Container>
@@ -55,7 +61,7 @@ const Shop = () => {
           </Breadcrumb>
         </div>
         <div className="flex justify-between lg:py-[50px]">
-          <div className="w-1/5">
+          <div className="w-1/5 pt-[50px]">
             <div
               className="flex justify-between items-center pb-[15px]"
               onClick={() => setShop(!shop)}
@@ -91,7 +97,7 @@ const Shop = () => {
               <h3 className="font-sans font-bold text-[20px] text-[#262626] lg:py-[15px]">
                 Shop by Color
               </h3>
-              {shop ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
+              {color ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
             </div>
             {color && (
               <ul>
@@ -119,7 +125,7 @@ const Shop = () => {
               <h3 className="font-sans font-bold text-[20px] text-[#262626] lg:py-[15px]">
                 Shop by Brand
               </h3>
-              {shop ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
+              {brand ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
             </div>
             {brand && (
               <ul>
@@ -147,7 +153,7 @@ const Shop = () => {
               <h3 className="font-sans font-bold text-[20px] text-[#262626] lg:py-[15px]">
                 Shop by Price
               </h3>
-              {shop ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
+              {price ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
             </div>
             {price && (
               <ul>
@@ -169,10 +175,19 @@ const Shop = () => {
               </ul>
             )}
           </div>
-          <div className="w-4/5">
+          <div className="w-[78%]">
             <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-xl font-semibold text-gray-800">Hello</h1>
+              <div className="">
+                <div className=" flex items-center gap-x-4">
+              <div onClick={()=>setActiveGrid("")} className="p-3 hover:bg-[gray] text-[#262626]">
+               <IoGrid />
+
+              </div>
+              <div onClick={handleMulti} className="p-3 hover:bg-[gray] text-[#262626]">
+
+               <FaList/>
+              </div>
+                </div>
               </div>
               <div className="flex items-center gap-x-4">
                 <div className="flex items-center gap-x-2">
@@ -207,7 +222,7 @@ const Shop = () => {
               </div>
             </div>
             <div className="flex justify-between flex-wrap">
-              <Post allPage={allPage} />
+              <Post allPage={allPage} activeGrid={activeGrid} />
               <div className="py-10 flex justify-center w-full">
                 <Pagination pageNumber={pageNumber}
                  paginate={paginate}

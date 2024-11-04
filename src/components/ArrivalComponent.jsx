@@ -4,6 +4,8 @@ import { IoGitCompare } from "react-icons/io5";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Container from "./Container";
+import { Link } from "react-router-dom";
+
 
 const ArrivalComponent = ({ item }) => {
   const [loading, setLoading] = useState(true);
@@ -26,13 +28,16 @@ const ArrivalComponent = ({ item }) => {
               {loading ? (
                 <Skeleton height={300} width={"100%"} />
               ) : (
+                <Link to="/shop">
                 <img
                   src={item.thumbnail}
                   alt="Product"
                   onLoad={handleImageLoad}
                 />
+                </Link>
+
               )}
-              <ul className="bg-white absolute left-0 h-[130px] duration-300 ease-in-out bottom-[-120px] w-full group-hover:bottom-[0px] py-2 text-end pr-4">
+              <ul className="bg-white absolute left-0 h-[130px] duration-300 ease-in-out bottom-[-120px] w-full group-hover:bottom-[0px] py-2 text-end pr-4 cursor-pointer">
                 <li className="py-2">
                   Add to Wish List <FaHeart className="inline-block" />
                 </li>
