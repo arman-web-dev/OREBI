@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header>
       <Container>
-        <div className="flex items-center  lg:py-[32px] py-[20px] relative">
+        <div className="flex items-center lg:py-[32px] py-[20px] relative">
           <div className="w-1/4">
             <img src={Logo} alt="logo" />
           </div>
@@ -31,39 +31,54 @@ const Header = () => {
           >
             <ul className="flex flex-col lg:flex-row items-center lg:justify-end py-4 lg:py-0">
               <li
-                className={`px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
+                className={`relative group px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
                   isOpen ? "animate__animated animate__backInLeft" : ""
                 } lg:animate-none`}
               >
-                <Link to="/">Home</Link>
+                <Link to="/" className="relative inline-block hover:text-black transition-colors duration-300 ease-in-out">
+                  Home
+                  <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-black scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+                </Link>
               </li>
               <li
-                className={`px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
+                className={`relative group px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
                   isOpen ? "animate__animated animate__backInLeft" : ""
                 } lg:animate-none`}
               >
-                <Link to="/shop">Shop</Link>
+                <Link to="/shop" className="relative inline-block hover:text-black transition-colors duration-300 ease-in-out">
+                  Shop
+                  <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-black scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+                </Link>
               </li>
               <li
-                className={`px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
+                className={`relative group px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
                   isOpen ? "animate__animated animate__backInLeft" : ""
                 } lg:animate-none`}
               >
-                <Link to="/about">About</Link>
+                <Link to="/about" className="relative inline-block hover:text-black transition-colors duration-300 ease-in-out">
+                  About
+                  <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-black scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+                </Link>
               </li>
               <li
-                className={`px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
+                className={`relative group px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
                   isOpen ? "animate__animated animate__backInLeft" : ""
                 } lg:animate-none`}
               >
-                <Link to="/contact">Contact</Link>
+                <Link to="/contact" className="relative inline-block hover:text-black transition-colors duration-300 ease-in-out">
+                  Contact
+                  <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-black scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+                </Link>
               </li>
               <li
-                className={`px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
+                className={`relative group px-[20px] py-2 lg:py-0 font-sans text-[14px] font-normal text-[#767676] ${
                   isOpen ? "animate__animated animate__backInLeft" : ""
                 } lg:animate-none`}
               >
-                <Link to="/">Journals</Link>
+                <Link to="/" className="relative inline-block hover:text-black transition-colors duration-300 ease-in-out">
+                  Journals
+                  <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-black scale-x-0 transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+                </Link>
               </li>
             </ul>
           </div>

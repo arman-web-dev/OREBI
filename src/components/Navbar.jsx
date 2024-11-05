@@ -83,7 +83,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search Products....."
-                className="w-full lg:py-[16px] py-[10px] px-[20px] outline-none border-none lg:text-[16px] md:text-[16px] text-[12px] font-normal font-sans"
+                className="w-full lg:py-[16px] py-[10px] px-[20px] outline-none border-none lg:text-[16px] md:text-[16px] text-[12px] font-normal font-sans focus:ring-0"
               />
               <FaSearch className="absolute top-[50%] right-[16px] translate-y-[-50%] lg:text-[16px] md:text-[16px] text-[12px]" />
             </div>

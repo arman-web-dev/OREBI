@@ -9,6 +9,7 @@ import { ApiData } from "../components/ContextApi";
 import Pagination from "../components/Pagination";
 import { FaList } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
+// let [catagory, setCatagory] = useState([]);
 
 const Shop = () => {
   let info = useContext(ApiData);
@@ -46,6 +47,12 @@ const Shop = () => {
   let handleMulti = () => {
     setActiveGrid('active');
   };
+  let handleChange = (e) => {
+      setPerPage(e.target.value);
+  };
+  // useEffect(() => {
+  //   setCatagory([...new Set(info.map((item)=>item.catagory))), ...new Set])
+  // },[]);
   return (
     <section>
       <Container>
@@ -209,14 +216,14 @@ const Shop = () => {
                   <label htmlFor="show" className="text-[#262626] font-medium">
                     Show:
                   </label>
-                  <select
+                  <select onChange={handleChange}
                     name="show"
                     id="show"
-                    className="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="px-2 py-1 border border-gray-300 rounded-md focus:outline-none  focus:ring-0"
                   >
-                    <option value="">8</option>
-                    <option value="">12</option>
-                    <option value="">18</option>
+                    <option value="6">6</option>
+                    <option value="12">12</option>
+                    <option value="18">18</option>
                   </select>
                 </div>
               </div>
