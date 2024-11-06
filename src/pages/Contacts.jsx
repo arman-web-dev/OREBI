@@ -43,16 +43,10 @@ const Contacts = () => {
               />
             </div>
             <div className="flex flex-col py-[23px]">
-              <label
-                htmlFor=""
-                className="font-sans font-bold text-[16px] text-[#262626]"
-              >
+              <label htmlFor="" className="font-sans font-bold text-[16px] text-[#262626]" >
                 Email
               </label>
-              <input
-                type="email"
-                placeholder="Your email here"
-                className="border-transparent border-b border-b-[#f0f0f0] pl-0 focus:ring-transparent focus:border-transparent focus:border-b focus:border-b-[#f0f0f0]
+              <input type="email" placeholder="Your email here" className="border-transparent border-b border-b-[#f0f0f0] pl-0 focus:ring-transparent focus:border-transparent focus:border-b focus:border-b-[#f0f0f0]
                 font-sans font-normal text-[14px] text-[#767676] "
               />
             </div>

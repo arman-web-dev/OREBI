@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
 import { IoGitCompare } from "react-icons/io5";
-import { ApiData } from "./ContextApi";
+import { useAuth } from "./ContextApi";
 import { Link } from "react-router-dom";
 
 const Post = ({ allPage, activeGrid }) => {
-  let Data = useContext(ApiData);
+  let Data = useAuth();
 
   return (
     <div className={`${activeGrid === "active" ? "flex flex-col gap-6 mt-5" : "flex flex-wrap gap-4 mt-5"}`}>

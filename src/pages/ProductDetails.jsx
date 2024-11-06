@@ -85,10 +85,10 @@ const ProductDetails = () => {
             Status : {singleProduct.stock}
           </h2>
           <div className="flex space-x-4 py-[30px] border-b border-b-[#F0f0f0] ">
-            <button className="px-10 py-4 border border-black text-black bg-white transition hover:bg-black hover:text-white duration-300">
+            <button className="px-10 py-4 border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300">
               Add to Wish List
             </button>
-            <button className="px-10 py-4 border border-black text-black bg-white transition hover:bg-black hover:text-white duration-300">
+            <button className="px-10 py-4 border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300">
               Add to Cart
             </button>
           </div>

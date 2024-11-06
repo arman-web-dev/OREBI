@@ -9,10 +9,19 @@ import {
 } from "react-icons/fa";
 import { RiBarChartHorizontalLine } from "react-icons/ri";
 import Container from "./Container";
+import { Link } from "react-router-dom";
+import { useAuth } from "./ContextApi";
+import { SlUserFollowing } from "react-icons/sl";
 
 const Navbar = () => {
-  let [show, setShow] = useState(false);
+  let { isLogin, setIsLogin } = useAuth();
+    let [show, setShow] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
+
+  let logOut =()=>{
+    setIsLogin(false);
+    
+  }
 
   const categoryDropdownRef = useRef(null);
   const userDropdownRef = useRef(null);
@@ -92,21 +101,42 @@ const Navbar = () => {
           <div className="lg:w-1/4">
             <div className="flex justify-end gap-x-6">
               <div className="flex items-center">
-                <FaUser />
                 <div
                   onClick={() => setIsOpen(!isOpen)}
                   ref={userDropdownRef}
-                  className="relative cursor-pointer"
+                  className="relative cursor-pointer flex items-center"
                 >
+               {
+                  isLogin ?<SlUserFollowing className="text-[]"/>
+
+                  : <FaUser />
+                }
                   {isOpen ? <FaCaretUp /> : <FaCaretDown />}
                   {isOpen && (
                     <ul className="absolute top-[30px] left-[-35px] sm:left-[-40px] mt-2 w-[98px] sm:w-[103px] md:w-[102px] bg-[#262626] shadow-lg z-10">
-                      <li className="px-3 sm:px-4 py-2 hover:bg-gray-700 text-white cursor-pointer transition-all duration-300 ease-in-out text-sm sm:text-[12px]">
+                      {
+                        isLogin ?
+                        <Link to='/myaccount' >
+                        <li className="px-3 sm:px-4 py-2 hover:bg-gray-700 text-white cursor-pointer transition-all duration-300 ease-in-out text-sm sm:text-[12px]">
                         My Account
-                      </li>
-                      <li className="px-3 sm:px-4 py-2 hover:bg-gray-700 text-white cursor-pointer transition-all duration-300 ease-in-out text-sm sm:text-[12px]">
+                      </li> 
+                        </Link>:
+                        <Link to='/login'>
+                      <li  className="px-3 sm:px-4 py-2 hover:bg-gray-700 text-white cursor-pointer transition-all duration-300 ease-in-out text-sm sm:text-[12px]">
+                            Log In
+                    </li>
+                        </Link>
+                    
+                      }
+                      {
+                        isLogin ? <li onClick={()=>setIsLogin(false)} className="px-3 sm:px-4 py-2 hover:bg-gray-700 text-white cursor-pointer transition-all duration-300 ease-in-out text-sm sm:text-[12px]">
                         Log Out
+                      </li> : <li className="px-3 sm:px-4 py-2 hover:bg-gray-700 text-white cursor-pointer transition-all duration-300 ease-in-out text-sm sm:text-[12px]">
+                        <Link to="/signup">
+                            Sign up
+                        </Link>
                       </li>
+                      }
                     </ul>
                   )}
                 </div>

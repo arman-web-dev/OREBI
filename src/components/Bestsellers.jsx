@@ -1,10 +1,10 @@
 import Container from "./Container";
 import React, { useContext } from "react";
 import Slider from "react-slick";
-import { ApiData } from "./ContextApi";
+import { useAuth } from "./ContextApi";
 import BestsellersComponent from "./BestsellersComponent";
 const Bestsellers = () => {
-  let Data = useContext(ApiData);
+  let {info} = useAuth();
   const settings = {
     infinite: true,
     speed: 2000,
@@ -21,7 +21,7 @@ const Bestsellers = () => {
             Our Bestsellers
           </h2>
           <Slider {...settings}>
-            {Data.map((item) => (
+            {info.map((item) => (
               <BestsellersComponent item={item} />
             ))}
           </Slider>

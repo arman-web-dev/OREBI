@@ -16,6 +16,7 @@ import MyAccount from "./pages/MyAccount";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
+import app from "./firebaseConfig.js";
 
 function App() {
   let router = createBrowserRouter(

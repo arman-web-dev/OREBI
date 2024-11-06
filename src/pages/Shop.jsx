@@ -5,14 +5,14 @@ import { HiHome } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import Post from "../components/Post";
-import { ApiData } from "../components/ContextApi";
+import { useAuth } from "../components/ContextApi";
 import Pagination from "../components/Pagination";
 import { FaList } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
 // let [catagory, setCatagory] = useState([]);
 
 const Shop = () => {
-  let info = useContext(ApiData);
+  let {info} = useAuth();
   let [shop, setShop] = useState(true);
   let [color, setColor] = useState(true);
   let [brand, setBrand] = useState(false);
@@ -81,19 +81,19 @@ const Shop = () => {
             {shop && (
               <ul>
                 <li className="font-sans font-normal text-[16px] text-[#767676] lg:py-5 border-b border-b-[#f0f0f0] ">
-                  catagory1
+                  catagory 1
                 </li>
                 <li className="font-sans font-normal text-[16px] text-[#767676] lg:py-5 border-b border-b-[#f0f0f0] ">
-                  catagory2
+                  catagory 2
                 </li>
                 <li className="font-sans font-normal text-[16px] text-[#767676] lg:py-5 border-b border-b-[#f0f0f0] ">
-                  catagory3
+                  catagory 3
                 </li>
                 <li className="font-sans font-normal text-[16px] text-[#767676] lg:py-5 border-b border-b-[#f0f0f0] ">
-                  catagory4
+                  catagory 4
                 </li>
                 <li className="font-sans font-normal text-[16px] text-[#767676] lg:py-5 border-b border-b-[#f0f0f0] ">
-                  catagory5
+                  catagory 5
                 </li>
               </ul>
             )}

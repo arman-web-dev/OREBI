@@ -1,10 +1,10 @@
 import Container from "./Container";
 import React, { useContext } from "react";
 import Slider from "react-slick";
-import { ApiData } from "./ContextApi";
+import { useAuth } from "./ContextApi";
 import ArrivalComponent from "./ArrivalComponent";
 const NewArrival = () => {
-  let Data = useContext(ApiData);
+  let {info} = useAuth();
   const settings = {
     infinite: true,
     speed: 2500,
@@ -21,7 +21,7 @@ const NewArrival = () => {
             New Arrivals
           </h2>
           <Slider {...settings}>
-            {Data.map((item) => (
+            {info.map((item) => (
               <ArrivalComponent item={item} />
             ))}
           </Slider>
