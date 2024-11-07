@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, createContext } from 'react';
 
-const ApiData = createContext(); // Define context
+const ApiData = createContext(); 
 
 const ContextApi = ({ children }) => {
   const [info, setInfo] = useState([]);
@@ -16,6 +16,7 @@ const ContextApi = ({ children }) => {
   useEffect(() => {
     getData();
   }, []);
+  
 
   return (
     <ApiData.Provider value={{ info, isLogin, setIsLogin }}>
@@ -24,12 +25,10 @@ const ContextApi = ({ children }) => {
   );
 };
 
-// Export ContextApi as the default export
 export default ContextApi;
 
-// Custom hook to access the context
-// Custom hook to access the context
+
 export const useAuth = () => {
-  return React.useContext(ApiData); // Ensure this returns the context properly
+  return React.useContext(ApiData); 
 };
 

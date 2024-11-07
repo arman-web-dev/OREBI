@@ -9,7 +9,7 @@ import { LuPlus } from "react-icons/lu";
 import { HiMinusSm } from "react-icons/hi";
 
 const ProductDetails = () => {
-  let { id: productId } = useParams(); // Destructure to get the product ID
+  let { id: productId } = useParams();
   let [singleProduct, setSingleProduct] = useState({});
   let [show, setShow] = useState(false);
   let [ship, setShip] = useState(true);
