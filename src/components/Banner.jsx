@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 import "slick-carousel/slick/slick.css";
-import Slider from 'react-slick';
-import Container from './Container'
-import Slide1 from '../assets/Hero.jpg'
-import './banner.css'
+import Slider from "react-slick";
+import Container from "./Container";
+import Slide1 from "../assets/Hero.jpg";
+import "./banner.css";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const settings = {
@@ -15,7 +16,7 @@ const Banner = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3300,
-    appendDots: dots => (
+    appendDots: (dots) => (
       <div
         style={{
           backgroundColor: "transparent",
@@ -24,48 +25,54 @@ const Banner = () => {
           position: "absolute",
           left: "50px",
           top: "50%",
-          transform: "translateY(-50%)"
+          transform: "translateY(-50%)",
         }}
       >
         <ul style={{ margin: "0px" }}> {dots} </ul>
       </div>
     ),
-    customPaging: i => (
+    customPaging: (i) => (
       <div
         style={{
           width: "30px",
           color: "#262626",
           borderRight: "3px white solid",
           padding: "10px 0",
-          color: 'transparent'
-
+          color: "transparent",
         }}
       >
         0{i + 1}
       </div>
-    )
+    ),
   };
   return (
-    <section className='bg-[#f5f7f9]'>
+    <section className="bg-[#f5f7f9]">
       <Container>
         <Slider {...settings}>
-          <div>
-            <img src={Slide1} alt="" />
-          </div>
-          <div>
-            <img src={Slide1} alt="" />
-          </div>
-          <div>
-            <img src={Slide1} alt="" />
-          </div>
-          <div>
-            <img src={Slide1} alt="" />
-          </div>
-
+          <Link to="/shop">
+            <div>
+              <img src={Slide1} alt="" className="w-full" />
+            </div>
+          </Link>
+          <Link to="/shop">
+            <div>
+              <img src={Slide1} alt="" className="w-full" />
+            </div>
+          </Link>
+          <Link to="/shop">
+            <div>
+              <img src={Slide1} alt="" className="w-full" />
+            </div>
+          </Link>
+          <Link to="/shop">
+            <div>
+              <img src={Slide1} alt="" className="w-full" />
+            </div>
+          </Link>
         </Slider>
       </Container>
     </section>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;

@@ -47,12 +47,13 @@ const ProductDetails = () => {
   let newPrice = singleProduct.price - discount;
 
   let handleCart = (item) => {
-    dispatch(addToCart({...item, qun: 1}))
+    dispatch(addToCart({...item, qun: 1})); // Set initial quantity to 1
     toast("Item added to cart!");
     setTimeout(() => {
       navigate("/cart");
     }, 2000);
   };
+  
 
   return (
     <div>

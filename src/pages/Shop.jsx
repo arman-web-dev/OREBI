@@ -135,29 +135,6 @@ const Shop = () => {
                 ))}
               </ul>
             )}
-
-            <div
-              className="flex justify-between items-center cursor-pointer"
-              onClick={() => setBrand(!brand)}
-            >
-              <h3 className="font-sans font-bold text-[20px] text-[#262626] lg:py-[15px]">
-                Shop by Brand
-              </h3>
-              {brand ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
-            </div>
-            {brand && (
-              <ul className="cursor-pointer">
-                {brandShow.map((item, index) => (
-                  <li
-                    key={index}
-                    onClick={() => handleBrand(item)}
-                    className="font-sans font-normal text-[16px] text-[#767676] lg:py-5 border-b border-b-[#f0f0f0]"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            )}
             <div
               className="flex justify-between items-center cursor-pointer"
               onClick={() => setPrice(!price)}
@@ -182,11 +159,33 @@ const Shop = () => {
                   $10.00 - $19.99
                 </li>
                 <li
-                  onClick={() => handleprice({ low: 20, high: 999 })}
+                  onClick={() => handleprice({ low: 20, high: 9999 })}
                   className="font-sans font-normal text-[16px] text-[#767676] lg:py-5 border-b border-b-[#f0f0f0] "
                 >
-                  $20.00 - $99.99
+                  $20.00 - $9999.99
                 </li>
+              </ul>
+            )}
+            <div
+              className="flex justify-between items-center cursor-pointer"
+              onClick={() => setBrand(!brand)}
+            >
+              <h3 className="font-sans font-bold text-[20px] text-[#262626] lg:py-[15px]">
+                Shop by Brand
+              </h3>
+              {brand ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
+            </div>
+            {brand && (
+              <ul className="cursor-pointer">
+                {brandShow.map((item, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleBrand(item)}
+                    className="font-sans font-normal text-[16px] text-[#767676] lg:py-5 border-b border-b-[#f0f0f0]"
+                  >
+                    {item}
+                  </li>
+                ))}
               </ul>
             )}
           </div>
@@ -196,13 +195,21 @@ const Shop = () => {
                 <div className=" flex items-center gap-x-4">
                   <div
                     onClick={() => setActiveGrid("")}
-                    className="p-3 hover:bg-[gray] text-[#262626]"
+                    className={`${
+                      activeGrid === "active"
+                        ? "p-3 hover:bg-[gray] text-[#262626]"
+                        : "p-3 bg-[gray] text-[#262626]"
+                    }`}
                   >
                     <IoGrid />
                   </div>
                   <div
                     onClick={handleMulti}
-                    className="p-3 hover:bg-[gray] text-[#262626]"
+                    className={`${
+                      activeGrid != "active"
+                        ? "p-3 hover:bg-[gray] text-[#262626]"
+                        : "p-3 bg-[gray] text-[#262626]"
+                    }`}
                   >
                     <FaList />
                   </div>

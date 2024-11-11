@@ -46,7 +46,7 @@ const Login = () => {
         });
         setTimeout(() => {
           navigate("/");
-        }, 5000);
+        }, 3000);
       })
       .then(() => {
         setIsLogin(true);
@@ -71,7 +71,7 @@ const Login = () => {
         } else if (errorCode === "auth/invalid-credential") {
           toast.error("Invalid email or password!", {
             position: "bottom-right",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -83,7 +83,7 @@ const Login = () => {
         } else if (errorCode === "auth/user-not-found") {
           toast.error("User Not Found", {
             position: "bottom-right",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
