@@ -9,9 +9,6 @@ import { addToCart, minusToCart, removeFromCart } from "../components/slice/prod
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.product.cartItems);
-
- 
-
   const handleAddQuantity = (item) => {
     dispatch(addToCart({ ...item, quantity: item.quantity + 1 }));
   };
@@ -43,9 +40,6 @@ const Cart = () => {
             </h2>
           </div>
         </div>
-        {cartItems.length ? (
-          cartItems.map((item) => (
-            <div className="py-[55px]">
               <div className="flex items-center bg-[#F5F5F3] py-[32px] pl-3 border">
                 <div className="w-1/4">
                   <h4 className="font-sans font-bold text-[16px] text-[#262626] ">
@@ -68,6 +62,9 @@ const Cart = () => {
                   </h4>
                 </div>
               </div>
+        {cartItems.length ? (
+          cartItems.map((item) => (
+            <div className="">
               <div className="flex items-center py-[32px] pl-3 border">
                 <div className="w-1/4">
                   <div className="">
@@ -84,7 +81,7 @@ const Cart = () => {
                         <img src={item.thumbnail} alt="" className="w-full" />
                       </div>
                       <div className="w-[50%]">
-                        <h3 className="font-sans font-bold text-[16px] text-[#262626]">
+                        <h3 className="font-sans font-bold text-[16px] text-[#262626] ">
                           {item.title}
                         </h3>
                       </div>
@@ -119,7 +116,7 @@ const Cart = () => {
                   </h4>
                 </div>
               </div>
-              <div className="flex items-center py-[20px] pl-3 border justify-between">
+              {/* <div className="flex items-center py-[20px] pl-3 border justify-between">
                 <div className="flex items-center">
                   <div className="">
                     <select className="border p-2 w-[250px] h-[50px] outline-none shadow focus:!rounded-none focus:ring-0 focus:outline-none focus:ring-[#fff] text-[#767676] font-sans font-normal text-[16px] ">
@@ -136,7 +133,7 @@ const Cart = () => {
                 <div className="font-sans font-bold text-[#262626] text-[14px] px-4">
                   <h4>Update cart</h4>
                 </div>
-              </div>
+              </div> */}
             </div>
           ))
         ) : (
