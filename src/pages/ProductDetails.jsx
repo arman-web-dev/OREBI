@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Container from "../components/Container";
 import axios from "axios";
 import { IoIosArrowForward } from "react-icons/io";
@@ -7,8 +7,14 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { FaRegStarHalfStroke } from "react-icons/fa6";
 import { LuPlus } from "react-icons/lu";
 import { HiMinusSm } from "react-icons/hi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../components/slice/productSlice";
 
 const ProductDetails = () => {
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
   let { id: productId } = useParams();
   let [singleProduct, setSingleProduct] = useState({});
   let [show, setShow] = useState(false);
@@ -39,6 +45,14 @@ const ProductDetails = () => {
 
   let discount = (singleProduct.price * singleProduct.discountPercentage) / 100;
   let newPrice = singleProduct.price - discount;
+
+  let handleCart = (item) => {
+    dispatch(addToCart({...item, qun: 1}))
+    toast("Item added to cart!");
+    setTimeout(() => {
+      navigate("/cart");
+    }, 2000);
+  };
 
   return (
     <div>
@@ -85,10 +99,13 @@ const ProductDetails = () => {
             Status : {singleProduct.stock}
           </h2>
           <div className="flex space-x-4 py-[30px] border-b border-b-[#F0f0f0] ">
-            <button className="px-10 py-4 border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300">
+            <button className="h-[50px] w-[200px] font-sans font-bold text-[14px] border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300">
               Add to Wish List
             </button>
-            <button className="px-10 py-4 border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300">
+            <button
+              onClick={() => handleCart(singleProduct)}
+              className="h-[50px] w-[200px] font-sans font-bold text-[14px] border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
+            >
               Add to Cart
             </button>
           </div>
@@ -161,7 +178,10 @@ const ProductDetails = () => {
                         idx < review.rating ? (
                           <FaStar className="text-[#FFD881] mr-1" key={idx} />
                         ) : (
-                          <FaRegStar className="mr-1 text-[#FFD881]" key={idx} />
+                          <FaRegStar
+                            className="mr-1 text-[#FFD881]"
+                            key={idx}
+                          />
                         )
                       )}
                     </div>
@@ -215,17 +235,33 @@ const ProductDetails = () => {
               <textarea
                 className="border-transparent border-b border-b-[#f0f0f0] pl-0 focus:ring-transparent focus:border-transparent focus:border-b focus:border-b-[#f0f0f0]
                 font-sans font-normal text-[14px] text-[#767676] resize-none"
-                rows="4" // Increase this value for more height
+                rows="4"
                 placeholder="Write your comment here..."
               />
             </div>
-           <div className="pt-[30px]">
-           <button type="submit" className="px-10 py-4 border border-black  bg-black text-white">
-           Post
-            </button>
-           </div>
+            <div className="pt-[30px]">
+              <button
+                type="submit"
+                className="h-[50px] w-[200px] font-sans font-bold text-[14px] border-[2px] border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
+              >
+                Post
+              </button>
+            </div>
           </form>
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition:Bounce
+        />
       </Container>
     </div>
   );

@@ -2,10 +2,13 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import ContextApi from "./components/ContextApi";
-
+import { Provider } from "react-redux";
+import { store } from "./store.js";
 
 createRoot(document.getElementById("root")).render(
-  <ContextApi>
-    <App />
-  </ContextApi>
+  <Provider store={store}>
+    <ContextApi>
+      <App />
+    </ContextApi>
+  </Provider>
 );

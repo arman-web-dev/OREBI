@@ -3,13 +3,12 @@ import Container from "../components/Container";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { ToastContainer, toast, Flip, Bounce } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast, Flip, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../components/ContextApi";
 
-
 const Login = () => {
-  let {setIsLogin} = useAuth();
+  let { setIsLogin } = useAuth();
   const auth = getAuth();
   let navigate = useNavigate();
   let [password, setPassword] = useState("");
@@ -17,8 +16,8 @@ const Login = () => {
 
   let handleClickLogin = async (e) => {
     e.preventDefault();
-    if(!email || !password) {
-      toast.error('Please enter email or password!', {
+    if (!email || !password) {
+      toast.error("Please enter email or password!", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -28,76 +27,73 @@ const Login = () => {
         progress: undefined,
         theme: "dark",
         transition: Flip,
-        });
-        return
+      });
+      return;
     }
     await signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      toast.success('LogIn successfull!', {
-        position: "bottom-left",
-        autoClose: 500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-        });
-          setTimeout(()=>{
-              navigate("/")
-          },5000)
-    })
-    .then(()=>{
-      setIsLogin(true);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      console.log(errorCode);
-      
-      const errorMessage = error.message;
-      if(errorCode === 'auth/wrong-password') {
-        toast.error('Incorrect password! please try again!', {
-          position: "bottom-right",
-          autoClose: 3000,
+      .then((userCredential) => {
+        const user = userCredential.user;
+        toast.success("LogIn successfull!", {
+          position: "bottom-left",
+          autoClose: 500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
           theme: "dark",
-          transition: Flip,
+          transition: Bounce,
         });
-        
-      }else if(errorCode === 'auth/invalid-credential'){
-        toast.error('Invalid email or password!', {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          transition: Flip,
-        });
-      }else if(errorCode === "auth/user-not-found"){
-        toast.error('User Not Found', {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          transition: Flip,
-        });
-      }
-    });
-    
+        setTimeout(() => {
+          navigate("/");
+        }, 5000);
+      })
+      .then(() => {
+        setIsLogin(true);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode);
 
+        const errorMessage = error.message;
+        if (errorCode === "auth/wrong-password") {
+          toast.error("Incorrect password! please try again!", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Flip,
+          });
+        } else if (errorCode === "auth/invalid-credential") {
+          toast.error("Invalid email or password!", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Flip,
+          });
+        } else if (errorCode === "auth/user-not-found") {
+          toast.error("User Not Found", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Flip,
+          });
+        }
+      });
   };
 
   return (
@@ -140,7 +136,8 @@ const Login = () => {
                       >
                         Email address
                       </label>
-                      <input  onChange={(e) => setEmail(e.target.value)}
+                      <input
+                        onChange={(e) => setEmail(e.target.value)}
                         value={email}
                         type="email"
                         placeholder="company@domain.com"
@@ -169,8 +166,9 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="">
-                  <button onClick={handleClickLogin}
-                    className="px-[70px] py-4 border-[2px] border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
+                  <button
+                    onClick={handleClickLogin}
+                    className="h-[50px] w-[200px] font-sans font-bold text-[14px] border-[2px] border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
                   >
                     Log in
                   </button>
@@ -193,14 +191,15 @@ const Login = () => {
             </p>
           </div>
           <div className="">
-            <button className="px-[70px] py-4 border-[2px] border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300">
-              Continue
-            </button>
+            <Link to="/signup">
+              <button className="h-[50px] w-[200px] font-sans font-bold text-[14px] border-[2px] border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300">
+                Continue
+              </button>
+            </Link>
           </div>
         </div>
       </Container>
       <ToastContainer />
-
     </section>
   );
 };

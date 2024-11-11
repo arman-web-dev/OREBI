@@ -65,7 +65,8 @@ const Contacts = () => {
               />
             </div>
            <div className="pt-[30px]">
-           <button type="submit" className="px-10 py-4 border border-black  bg-black text-white">
+           <button type="submit" className="h-[50px] w-[200px] font-sans font-bold text-[14px] border-[2px] border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
+              >
            Contact
             </button>
            </div>
