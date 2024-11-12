@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { ImCross } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, minusToCart, removeFromCart } from "../components/slice/productSlice";
+import {
+  addToCart,
+  minusToCart,
+  removeFromCart,
+} from "../components/slice/productSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -19,6 +23,12 @@ const Cart = () => {
   const handleRemoveItem = (id) => {
     dispatch(removeFromCart(id));
   };
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+ 
+  
   return (
     <section className="py-[55px]">
       <Container>
@@ -40,28 +50,28 @@ const Cart = () => {
             </h2>
           </div>
         </div>
-              <div className="flex items-center bg-[#F5F5F3] py-[32px] pl-3 border">
-                <div className="w-1/4">
-                  <h4 className="font-sans font-bold text-[16px] text-[#262626] ">
-                    Product
-                  </h4>
-                </div>
-                <div className="w-1/4">
-                  <h4 className="font-sans font-bold text-[16px] text-[#262626] ">
-                    Price
-                  </h4>
-                </div>
-                <div className="w-1/4">
-                  <h4 className="font-sans font-bold text-[16px] text-[#262626] ">
-                    Quantity
-                  </h4>
-                </div>
-                <div className="w-1/4">
-                  <h4 className="font-sans font-bold text-[16px] text-[#262626] ">
-                    Total
-                  </h4>
-                </div>
-              </div>
+        <div className="flex items-center bg-[#F5F5F3] py-[32px] pl-3 border">
+          <div className="w-1/4">
+            <h4 className="font-sans font-bold text-[16px] text-[#262626] ">
+              Product
+            </h4>
+          </div>
+          <div className="w-1/4">
+            <h4 className="font-sans font-bold text-[16px] text-[#262626] ">
+              Price
+            </h4>
+          </div>
+          <div className="w-1/4">
+            <h4 className="font-sans font-bold text-[16px] text-[#262626] ">
+              Quantity
+            </h4>
+          </div>
+          <div className="w-1/4">
+            <h4 className="font-sans font-bold text-[16px] text-[#262626] ">
+              Total
+            </h4>
+          </div>
+        </div>
         {cartItems.length ? (
           cartItems.map((item) => (
             <div className="">
@@ -143,6 +153,31 @@ const Cart = () => {
             </h2>
           </div>
         )}
+        <div className="pt-[50px]">
+          <h3 className="text-right font-sans font-bold text-[20px] text-[#262626] px-3">
+            Cart totals
+          </h3>
+          <div className="flex justify-end pt-[24px]">
+            <table>
+              <tr>
+                <td className="w-[220px] h-[50px] border px-3 font-sans font-bold text-[16px] text-[#262626]">
+                  Subtotal
+                </td>
+                <td className="w-[220px] h-[50px] border px-3 font-sans font-normal text-[16px] text-[#767676]">
+                  ${totalPrice.toFixed(2)}
+                </td>
+              </tr>
+              <tr>
+                <td className="w-[220px] h-[50px] border px-3 font-sans font-bold text-[16px] text-[#262626]">
+                  Total
+                </td>
+                <td className="w-[220px] h-[50px] border px-3 font-sans font-normal text-[16px] text-[#262626]">
+                  ${totalPrice.toFixed(2)}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </Container>
     </section>
   );

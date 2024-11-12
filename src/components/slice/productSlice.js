@@ -9,7 +9,7 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const existingItem = state.cartItems.find(item => item.id === action.payload.id);
+      const existingItem = state.cartItems.find((item) => item.id === action.payload.id);
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
@@ -17,18 +17,17 @@ const productSlice = createSlice({
       }
     },
     minusToCart: (state, action) => {
-      const item = state.cartItems.find(item => item.id === action.payload.id);
+      const item = state.cartItems.find((item) => item.id === action.payload.id);
       if (item) {
         if (item.quantity > 1) {
           item.quantity -= 1;
         } else {
-          // state.cartItems = state.cartItems.filter(cartItem => cartItem.id !== action.payload.id);
-          //jodi proyojon hoi
+          
         }
       }
     },
     removeFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter(item => item.id !== action.payload);
+      state.cartItems = state.cartItems.filter((item) => item.id !== action.payload);
     }
     
   },
