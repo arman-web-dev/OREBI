@@ -17,6 +17,7 @@ const Navbar = () => {
   let { isLogin, setIsLogin } = useAuth();
   let [show, setShow] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
+  let [cart, setCart] = useState(false);
 
   let logOut = () => {
     setIsLogin(false);
@@ -24,6 +25,7 @@ const Navbar = () => {
 
   const categoryDropdownRef = useRef(null);
   const userDropdownRef = useRef(null);
+  const cartDropdownRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -39,14 +41,21 @@ const Navbar = () => {
       ) {
         setIsOpen(false);
       }
+      if (
+        cartDropdownRef.current &&
+        !cartDropdownRef.current.contains(event.target)
+      ) {
+        setCart(false);
+      }
     };
-
+  
     document.addEventListener("mousedown", handleClickOutside);
-
+  
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  
 
   const handleCategoryClick = () => {
     setShow((prevShow) => !prevShow);
@@ -142,7 +151,14 @@ const Navbar = () => {
                   )}
                 </div>
               </div>
-              <FaShoppingCart />
+              <div onClick={() => setCart(!cart)} ref={cartDropdownRef}>
+                <FaShoppingCart className="" />
+              {cart && (
+                <div className="absolute z-20">
+                  <h1>ami</h1>
+                </div>
+              )}
+              </div>
             </div>
           </div>
         </div>

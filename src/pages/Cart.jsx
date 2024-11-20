@@ -14,7 +14,11 @@ const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.product.cartItems);
   const handleAddQuantity = (item) => {
-    dispatch(addToCart({ ...item, quantity: item.quantity + 1 }));
+    if (item.quantity < item.stock) {
+      dispatch(addToCart({ ...item, quantity: item.quantity + 1 }));
+    } else {
+      alert("Out of stock!");
+    }
   };
 
   const handleMinusQuantity = (item) => {
@@ -27,8 +31,7 @@ const Cart = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
- 
-  
+
   return (
     <section className="py-[55px]">
       <Container>
