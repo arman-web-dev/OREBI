@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
-import {
-  FaSearch,
-  FaUser,
-  FaCaretDown,
-  FaShoppingCart,
-  FaCaretUp,
-} from "react-icons/fa";
 import { RiBarChartHorizontalLine } from "react-icons/ri";
 import Container from "./Container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./ContextApi";
 import { SlUserFollowing } from "react-icons/sl";
+import ImgI from "../assets/item1.jpg";
+import { ImCross } from "react-icons/im";
+import { useDispatch, useSelector } from "react-redux";
+import {FaSearch,FaUser,FaCaretDown,FaShoppingCart,FaCaretUp} from "react-icons/fa";
+import { removeFromCart } from "./slice/productSlice";
 
 const Navbar = () => {
+  let dispatch = useDispatch()
+  let navigate = useNavigate();
   let { isLogin, setIsLogin } = useAuth();
+  let data = useSelector((state) => state.product.cartItems);
+  let [searchQuery, setSearchQuery] = useState("");
   let [show, setShow] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
   let [cart, setCart] = useState(false);
@@ -48,18 +50,36 @@ const Navbar = () => {
         setCart(false);
       }
     };
-  
+
     document.addEventListener("mousedown", handleClickOutside);
-  
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  
 
   const handleCategoryClick = () => {
     setShow((prevShow) => !prevShow);
   };
+  let handleCartClick = () => {
+    navigate("/cart");
+    setCart(false);
+  };
+  let handleCheckoutClick = () => {
+    navigate("/checkout");
+    setCart(false);
+  };
+  let handleRemoveItem = (id) => {
+    dispatch(removeFromCart(id))
+  }
+  const totalPrice = data.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+  let handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    
+  }
 
   return (
     <section className="bg-[#F5F5F3] lg:py-[25px] py-[10px]">
@@ -94,10 +114,9 @@ const Navbar = () => {
               </ul>
             )}
           </div>
-
           <div className="lg:w-2/4">
             <div className="relative">
-              <input
+              <input onChange={handleSearch}
                 type="text"
                 placeholder="Search Products....."
                 className="w-full lg:py-[16px] py-[10px] px-[20px] outline-none border-none lg:text-[16px] md:text-[16px] text-[12px] font-normal font-sans focus:ring-0"
@@ -105,7 +124,6 @@ const Navbar = () => {
               <FaSearch className="absolute top-[50%] right-[16px] translate-y-[-50%] lg:text-[16px] md:text-[16px] text-[12px]" />
             </div>
           </div>
-
           <div className="lg:w-1/4">
             <div className="flex justify-end gap-x-6">
               <div className="flex items-center">
@@ -115,7 +133,7 @@ const Navbar = () => {
                   className="relative cursor-pointer flex items-center"
                 >
                   {isLogin ? (
-                    <SlUserFollowing className="text-[]" />
+                    <SlUserFollowing />
                   ) : (
                     <FaUser />
                   )}
@@ -151,13 +169,65 @@ const Navbar = () => {
                   )}
                 </div>
               </div>
-              <div onClick={() => setCart(!cart)} ref={cartDropdownRef}>
-                <FaShoppingCart className="" />
-              {cart && (
-                <div className="absolute z-20">
-                  <h1>ami</h1>
-                </div>
-              )}
+              <div ref={cartDropdownRef} className="relative cursor-pointer">
+                {data.length > 0 && (
+                  <div className="absolute top-[-7px] left-[8px] h-[15px] w-[15px] rounded-full leading-[15px] bg-red-400 text-center text-white text-[10px] ">
+                    {data.length}
+                  </div>
+                )}
+                <FaShoppingCart onClick={() => setCart(!cart)} />
+                {cart && (
+                  <div className="absolute top-[15px] right-0 z-20 w-[360px] bg-white shadow-lg">
+                    <div className="">
+                      {data.map((item)=>(
+
+                    <div className="flex justify-between items-center bg-[#F5F5F3] py-2 px-3">
+                      <img
+                        src={item.thumbnail}
+                        alt="product"
+                        className="h-[80px] w-[80px]"
+                      />
+                      <div className="flex-1 px-3">
+                        <h3 className="font-sans font-bold text-[14px] text-[#262626]">
+                          {item.title}
+                        </h3>
+                        <h4 className="font-sans font-bold text-[14px] text-[#262626]">
+                         ${item.price} ({item.quantity})
+                        </h4>
+                      </div>
+                      <button onClick={() => handleRemoveItem(item.id)}>
+                        <ImCross />
+                      </button>
+                    </div>
+                      ))}
+                    <div className="bg-white p-3">
+                      <div className="flex justify-between items-center">
+                        <h3 className="font-sans font-normal text-[16px] text-[#767676]">
+                          Subtotal:
+                        </h3>
+                        <h3 className="font-sans font-bold text-[16px] text-[#262626]">
+                          ${totalPrice}
+                        </h3>
+                      </div>
+                      <div className="flex space-x-4 pt-5">
+                        <button
+                          onClick={handleCartClick}
+                          className="h-[50px] w-[160px] font-sans font-bold text-[14px] border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
+                        >
+                          View Cart
+                        </button>
+
+                        <button
+                          onClick={handleCheckoutClick}
+                          className="h-[50px] w-[160px] font-sans font-bold text-[14px] border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
+                        >
+                          Checkout
+                        </button>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

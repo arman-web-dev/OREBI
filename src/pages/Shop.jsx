@@ -198,7 +198,7 @@ const Shop = () => {
                     className={`${
                       activeGrid === "active"
                         ? "p-3 hover:bg-[gray] text-[#262626]"
-                        : "p-3 bg-[gray] text-[#262626]"
+                        : "p-3 bg-[#262626] text-[#fff]"
                     }`}
                   >
                     <IoGrid />
@@ -208,7 +208,7 @@ const Shop = () => {
                     className={`${
                       activeGrid != "active"
                         ? "p-3 hover:bg-[gray] text-[#262626]"
-                        : "p-3 bg-[gray] text-[#262626]"
+                        : "p-3 bg-[#262626] text-[#fff]"
                     }`}
                   >
                     <FaList />

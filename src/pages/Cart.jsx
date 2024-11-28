@@ -129,24 +129,6 @@ const Cart = () => {
                   </h4>
                 </div>
               </div>
-              {/* <div className="flex items-center py-[20px] pl-3 border justify-between">
-                <div className="flex items-center">
-                  <div className="">
-                    <select className="border p-2 w-[250px] h-[50px] outline-none shadow focus:!rounded-none focus:ring-0 focus:outline-none focus:ring-[#fff] text-[#767676] font-sans font-normal text-[16px] ">
-                      <option>Size</option>
-                      <option>Small</option>
-                      <option>Medium</option>
-                      <option>Large</option>
-                    </select>
-                  </div>
-                  <h4 className="font-sans font-bold text-[#262626] text-[14px] px-4">
-                    Apply coupon
-                  </h4>
-                </div>
-                <div className="font-sans font-bold text-[#262626] text-[14px] px-4">
-                  <h4>Update cart</h4>
-                </div>
-              </div> */}
             </div>
           ))
         ) : (
