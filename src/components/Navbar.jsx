@@ -8,15 +8,23 @@ import { SlUserFollowing } from "react-icons/sl";
 import ImgI from "../assets/item1.jpg";
 import { ImCross } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
-import {FaSearch,FaUser,FaCaretDown,FaShoppingCart,FaCaretUp} from "react-icons/fa";
+import {
+  FaSearch,
+  FaUser,
+  FaCaretDown,
+  FaShoppingCart,
+  FaCaretUp,
+} from "react-icons/fa";
 import { removeFromCart } from "./slice/productSlice";
 
 const Navbar = () => {
-  let dispatch = useDispatch()
+  let { info } = useAuth();
+  let dispatch = useDispatch();
   let navigate = useNavigate();
   let { isLogin, setIsLogin } = useAuth();
   let data = useSelector((state) => state.product.cartItems);
   let [searchQuery, setSearchQuery] = useState("");
+  let [searchFilter, setSearchFilter] = useState([]);
   let [show, setShow] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
   let [cart, setCart] = useState(false);
@@ -70,15 +78,27 @@ const Navbar = () => {
     setCart(false);
   };
   let handleRemoveItem = (id) => {
-    dispatch(removeFromCart(id))
-  }
+    dispatch(removeFromCart(id));
+  };
   const totalPrice = data.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
   let handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    
+    if (e.target.value == "") {
+      setSearchFilter([]);
+    } else {
+      let searchOneByOne = info.filter((item) =>
+        item.title.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setSearchFilter(searchOneByOne);
+    }
+  };
+  let handleSearchId = (id) =>{
+      navigate(`/shop/${id}`)
+      setSearchFilter([])
+      setSearchQuery('')
   }
 
   return (
@@ -116,12 +136,23 @@ const Navbar = () => {
           </div>
           <div className="lg:w-2/4">
             <div className="relative">
-              <input onChange={handleSearch}
+              <input
+                onChange={handleSearch}
+                value={searchQuery}
                 type="text"
                 placeholder="Search Products....."
                 className="w-full lg:py-[16px] py-[10px] px-[20px] outline-none border-none lg:text-[16px] md:text-[16px] text-[12px] font-normal font-sans focus:ring-0"
               />
               <FaSearch className="absolute top-[50%] right-[16px] translate-y-[-50%] lg:text-[16px] md:text-[16px] text-[12px]" />
+              {searchFilter.length > 0 && (
+                <div className="absolute z-30 w-full h-[180px] overflow-y-auto cursor-pointer">
+                  {searchFilter.map((item) => (
+                    <div onClick={()=>handleSearchId(item.id)} className="bg-white py-[10px] px-3">
+                      <h1>{item.title}</h1>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <div className="lg:w-1/4">
@@ -132,11 +163,7 @@ const Navbar = () => {
                   ref={userDropdownRef}
                   className="relative cursor-pointer flex items-center"
                 >
-                  {isLogin ? (
-                    <SlUserFollowing />
-                  ) : (
-                    <FaUser />
-                  )}
+                  {isLogin ? <SlUserFollowing /> : <FaUser />}
                   {isOpen ? <FaCaretUp /> : <FaCaretDown />}
                   {isOpen && (
                     <ul className="absolute top-[30px] left-[-35px] sm:left-[-40px] mt-2 w-[98px] sm:w-[103px] md:w-[102px] bg-[#262626] shadow-lg z-10">
@@ -179,52 +206,51 @@ const Navbar = () => {
                 {cart && (
                   <div className="absolute top-[15px] right-0 z-20 w-[360px] bg-white shadow-lg">
                     <div className="">
-                      {data.map((item)=>(
-
-                    <div className="flex justify-between items-center bg-[#F5F5F3] py-2 px-3">
-                      <img
-                        src={item.thumbnail}
-                        alt="product"
-                        className="h-[80px] w-[80px]"
-                      />
-                      <div className="flex-1 px-3">
-                        <h3 className="font-sans font-bold text-[14px] text-[#262626]">
-                          {item.title}
-                        </h3>
-                        <h4 className="font-sans font-bold text-[14px] text-[#262626]">
-                         ${item.price} ({item.quantity})
-                        </h4>
-                      </div>
-                      <button onClick={() => handleRemoveItem(item.id)}>
-                        <ImCross />
-                      </button>
-                    </div>
+                      {data.map((item) => (
+                        <div className="flex justify-between items-center bg-[#F5F5F3] py-2 px-3">
+                          <img
+                            src={item.thumbnail}
+                            alt="product"
+                            className="h-[80px] w-[80px]"
+                          />
+                          <div className="flex-1 px-3">
+                            <h3 className="font-sans font-bold text-[14px] text-[#262626]">
+                              {item.title}
+                            </h3>
+                            <h4 className="font-sans font-bold text-[14px] text-[#262626]">
+                              ${item.price} ({item.quantity})
+                            </h4>
+                          </div>
+                          <button onClick={() => handleRemoveItem(item.id)}>
+                            <ImCross />
+                          </button>
+                        </div>
                       ))}
-                    <div className="bg-white p-3">
-                      <div className="flex justify-between items-center">
-                        <h3 className="font-sans font-normal text-[16px] text-[#767676]">
-                          Subtotal:
-                        </h3>
-                        <h3 className="font-sans font-bold text-[16px] text-[#262626]">
-                          ${totalPrice}
-                        </h3>
-                      </div>
-                      <div className="flex space-x-4 pt-5">
-                        <button
-                          onClick={handleCartClick}
-                          className="h-[50px] w-[160px] font-sans font-bold text-[14px] border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
-                        >
-                          View Cart
-                        </button>
+                      <div className="bg-white p-3">
+                        <div className="flex justify-between items-center">
+                          <h3 className="font-sans font-normal text-[16px] text-[#767676]">
+                            Subtotal:
+                          </h3>
+                          <h3 className="font-sans font-bold text-[16px] text-[#262626]">
+                            ${totalPrice}
+                          </h3>
+                        </div>
+                        <div className="flex space-x-4 pt-5">
+                          <button
+                            onClick={handleCartClick}
+                            className="h-[50px] w-[160px] font-sans font-bold text-[14px] border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
+                          >
+                            View Cart
+                          </button>
 
-                        <button
-                          onClick={handleCheckoutClick}
-                          className="h-[50px] w-[160px] font-sans font-bold text-[14px] border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
-                        >
-                          Checkout
-                        </button>
+                          <button
+                            onClick={handleCheckoutClick}
+                            className="h-[50px] w-[160px] font-sans font-bold text-[14px] border-2 border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300"
+                          >
+                            Checkout
+                          </button>
+                        </div>
                       </div>
-                    </div>
                     </div>
                   </div>
                 )}
